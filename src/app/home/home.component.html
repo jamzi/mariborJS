@@ -1,0 +1,19 @@
+<h3 md-subheader>Users</h3>
+
+<md-select placeholder="Order By" [(ngModel)]="selectedOrderBy" name="orderByValue">
+  <md-option *ngFor="let orderBy of orderByValues" [value]="orderBy.value">
+    {{orderBy.viewValue}}
+  </md-option>
+</md-select>
+<button md-button (click)="filterBy(selectedOrderBy)">SET VALUE</button>
+
+<md-card>
+  <md-list>
+    <md-list-item *ngFor="let user of users | async">
+      <h2 md-line>{{user.first_name}} {{user.last_name}}</h2>
+      <p md-line>{{user.email}}</p>
+    </md-list-item>
+  </md-list>
+</md-card>
+
+<button md-raised-button color="primary" (click)="onLogout()">Logout</button>
