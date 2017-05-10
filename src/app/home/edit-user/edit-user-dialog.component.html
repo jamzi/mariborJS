@@ -1,0 +1,8 @@
+<h1>Edit user</h1>
+<md-input-container>
+    <input mdInput [(ngModel)]="user.first_name" placeholder="First name">
+</md-input-container>
+<md-input-container>
+    <input mdInput [(ngModel)]="user.last_name" placeholder="Last name">
+</md-input-container>
+<button type="submit" md-raised-button color="accent" (click)="dialogRef.close(user)">Save</button>

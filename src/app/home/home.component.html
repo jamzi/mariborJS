@@ -9,7 +9,7 @@
 
 <md-card>
   <md-list>
-    <md-list-item *ngFor="let user of users | async">
+    <md-list-item *ngFor="let user of users | async" (click)="editUser(user)">
       <h2 md-line>{{user.first_name}} {{user.last_name}}</h2>
       <p md-line>{{user.email}}</p>
     </md-list-item>

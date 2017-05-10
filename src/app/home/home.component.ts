@@ -4,6 +4,8 @@ import { DatabaseService } from "app/_services/database.service";
 import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 import { MdDialogRef, MdDialog } from "@angular/material";
 import { User } from "app/_models/user.model";
+import { EditUserDialog } from "app/home/edit-user/edit-user-dialog.component";
+import { SnackbarService } from "app/_services/snackbar.service";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private databaseService: DatabaseService,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -33,7 +36,26 @@ export class HomeComponent implements OnInit {
     this.databaseService.filterBy(selectedOrderBy);
   }
 
+  editUser(user: User) {
+    let dialogRef = this.dialog.open(EditUserDialog);
+    dialogRef.componentInstance.user = user;
+    dialogRef.afterClosed().subscribe(user => {
+      this.updateUser(user);
+    });
+  }
+
+  updateUser(user: User) {
+    this.databaseService.updateUser(user).subscribe(
+      data => {
+        this.snackbarService.show('User sucessfully updated');
+      },
+      error => {
+        this.snackbarService.show(error);
+      });
+  }
+
   onLogout() {
     this.authService.logout();
   }
 }
+

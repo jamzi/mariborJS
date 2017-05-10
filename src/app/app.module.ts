@@ -19,6 +19,7 @@ import { AuthGuard } from "app/_guards";
 import { AuthService } from "app/_services/auth.service";
 import { SnackbarService } from "app/_services/snackbar.service";
 import { DatabaseService } from "app/_services/database.service";
+import { EditUserDialog } from "app/home/edit-user/edit-user-dialog.component";
 
 export const firebaseConfig = {
   apiKey: "",
@@ -34,7 +35,8 @@ export const firebaseConfig = {
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditUserDialog
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,9 @@ export const firebaseConfig = {
     SnackbarService,
     DatabaseService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EditUserDialog
+  ]
 })
 export class AppModule { }
